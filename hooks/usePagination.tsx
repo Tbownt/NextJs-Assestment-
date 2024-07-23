@@ -1,15 +1,26 @@
 import { Item } from "@/types";
-import { useState } from "react";
+import { shuffleArray } from "@/utils/ShuffleArray";
+import { useState, useEffect, useMemo } from "react";
 
 export const usePagination = (items: Item[]) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const totalPages = Math.ceil(items.length / itemsPerPage);
+  const shuffledItems = useMemo(() => shuffleArray(items), [items]);
+
+  const filteredItems = useMemo(
+    () =>
+      shuffledItems.filter(
+        (item) => !(item.stock === 0 && item.hideWhenOutOfStock)
+      ),
+    [shuffledItems]
+  );
+
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentItems = items.slice(startIndex, endIndex);
+  const currentItems = filteredItems.slice(startIndex, endIndex);
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
@@ -22,6 +33,13 @@ export const usePagination = (items: Item[]) => {
       setCurrentPage(currentPage + 1);
     }
   };
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [totalPages, currentPage]);
+
   return {
     itemsPerPage,
     currentItems,

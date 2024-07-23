@@ -1,23 +1,30 @@
-import { Box } from "@mui/material";
-import dynamic from "next/dynamic";
-import data from "../response.json";
-import { Navbar } from "@/components/Navbar";
+"use client";
+import { Footer, Navbar } from "@/components";
+import { AppContext } from "@/context/MarketPlaceContext";
+import { Box, Button, Typography } from "@mui/material";
+import Link from "next/link";
+import { useContext } from "react";
 
 const HomePage = () => {
-  const items = data.data.rows;
-
-  const LazyListItems = dynamic(() => import("../components/ItemList"));
+  const { view } = useContext(AppContext);
   return (
     <Box sx={{ minHeight: "100vh" }}>
       <Navbar />
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          height: 1500,
         }}
       >
-        <LazyListItems items={items} />
+        <h1>HomePage</h1>
+        <Typography variant="h6">Welcome back {view} </Typography>
+        <Link href="/Marketplace">
+          <Typography>Check MarketPlace</Typography>
+        </Link>
       </Box>
+      <Footer />
     </Box>
   );
 };

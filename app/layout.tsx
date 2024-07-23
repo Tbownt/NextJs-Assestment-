@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "../theme";
+import theme from "@/theme";
+import { AppProvider } from "@/context/MarketPlaceContext";
+import { SideMenu } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        <AppProvider>
+          <ThemeProvider theme={theme}>
+            {children}
+            <SideMenu />
+          </ThemeProvider>
+        </AppProvider>
       </body>
     </html>
   );
