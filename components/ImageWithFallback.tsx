@@ -1,12 +1,9 @@
 "use client";
-import Image from "next/image";
-import { CSSProperties, useState } from "react";
+import Image, { ImageProps } from "next/image";
+import { useEffect, useState } from "react";
 
-interface ImageWithFallbackProps {
-  src: string;
-  alt: string;
+interface ImageWithFallbackProps extends ImageProps {
   fallbackSrc: string;
-  style: CSSProperties;
 }
 
 export const ImageWithFallback = ({
@@ -14,19 +11,24 @@ export const ImageWithFallback = ({
   alt,
   fallbackSrc,
   style,
+  className,
 }: ImageWithFallbackProps) => {
   const [imgSrc, setImgSrc] = useState(src);
+
+  useEffect(() => {
+    setImgSrc(src);
+  }, [src]);
 
   return (
     <Image
       src={imgSrc}
       width={500}
       height={500}
-      priority
       alt={alt}
       style={style}
-      className="card"
-      onError={() => setImgSrc(fallbackSrc)}
+      className={className}
+      onErrorCapture={() => setImgSrc(fallbackSrc)}
+      priority
     />
   );
 };

@@ -22,10 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AppProvider>
-          <ThemeProvider theme={theme}>
-            {children}
-            <SideMenu />
-          </ThemeProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </AppProvider>
       </body>
     </html>

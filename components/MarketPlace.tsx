@@ -8,6 +8,7 @@ import { ImageWithFallback } from "./ImageWithFallback";
 import { PaginationMarketPlace } from "./PaginationMarketPlace";
 import { AppContext } from "@/context/MarketPlaceContext";
 import { useRouter } from "next/navigation";
+import { filteredItems, formatPrice } from "@/helpers";
 
 interface MarketPlaceListProps {
   items: Item[];
@@ -43,20 +44,12 @@ export const MarketPlace = ({ items }: MarketPlaceListProps) => {
     scrollTo(0, 0);
   }, [currentPage]);
 
-  const handleCardClick = (nft: Item) => {
+  const checkCardDetail = (nft: Item) => {
     setSelectedCard(nft);
-    router.push("/Detail");
+    router.push(`/Marketplace/${nft.id}`);
   };
 
-  const formatPrice = (value: string) => {
-    let strValue = value.toString();
-    const formattedValue = strValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return formattedValue;
-  };
-
-  const filteredItems = currentItems.filter(
-    (item) => !(item.stock === 0 && item.hideWhenOutOfStock)
-  );
+  const nftItems = filteredItems(currentItems);
 
   return (
     <Box
@@ -77,11 +70,11 @@ export const MarketPlace = ({ items }: MarketPlaceListProps) => {
         }}
       >
         <Grid container spacing={6}>
-          {filteredItems.map((nft, index) => (
+          {nftItems.map((nft, index) => (
             <Grid item xs={12} sm={6} md={4} key={nft.id}>
-              <Fade in={index < visibleIndex} timeout={1000}>
+              <Fade in={index < visibleIndex} timeout={500}>
                 <Card
-                  onClick={() => handleCardClick(nft)}
+                  onClick={() => checkCardDetail(nft)}
                   sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -95,6 +88,7 @@ export const MarketPlace = ({ items }: MarketPlaceListProps) => {
                     background:
                       "radial-gradient(circle, rgba(0,255,153,1) 18%, rgba(99,56,174,1) 88%)",
                   }}
+                  key={nft.title}
                 >
                   <ImageWithFallback
                     src={
@@ -104,6 +98,7 @@ export const MarketPlace = ({ items }: MarketPlaceListProps) => {
                     }
                     alt={nft.title}
                     fallbackSrc="/images/noImg.png"
+                    className="card"
                     style={{
                       width: "100%",
                       height: "65%",
@@ -152,9 +147,6 @@ export const MarketPlace = ({ items }: MarketPlaceListProps) => {
                       <Box
                         sx={{ display: "flex", gap: 2, alignItems: "center" }}
                       >
-                        <Typography color="#ffffff" variant="h6">
-                          {formatPrice(nft.price.toString())}
-                        </Typography>
                         <Typography
                           color="#00ff99"
                           sx={{
@@ -165,6 +157,9 @@ export const MarketPlace = ({ items }: MarketPlaceListProps) => {
                           }}
                         >
                           points
+                        </Typography>
+                        <Typography color="#ffffff" variant="h6">
+                          {formatPrice(nft.price.toString())}
                         </Typography>
                       </Box>
                     </Box>

@@ -18,10 +18,10 @@ export const AppContext = createContext<AppContextProps>({} as AppContextProps);
 
 export const AppProvider = ({ children }: ContextProps) => {
   const [openSideMenu, setOpenSideMenu] = useState(false);
-  const [view, setViewState] = useState<"admin" | "user">("user");
+  const [view, setViewState] = useState<"admin" | "user">("admin");
   const [selectedCard, setSelectedCardState] = useState<
     Item | null | undefined
-  >(undefined);
+  >(null);
 
   const toggleSideMenu = () => {
     setOpenSideMenu((prev) => !prev);

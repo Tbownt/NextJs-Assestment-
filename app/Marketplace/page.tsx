@@ -1,11 +1,11 @@
-import data from "../../response.json";
+import response from "../../response.json";
 import { Box } from "@mui/material";
 import { Navbar, Footer, MarketPlace, InternalError } from "@/components";
 
 const MarketPlacePage = () => {
-  const items = data.data.rows;
+  const items = response.data.rows;
 
-  if (data.status === true && data.message === "Ok") {
+  if (response.status === true && response.message === "Ok") {
     return (
       <Box sx={{ minHeight: "100vh" }}>
         <Navbar />

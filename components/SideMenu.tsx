@@ -5,15 +5,47 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemText,
   Typography,
+  Button,
 } from "@mui/material";
 import Image from "next/image";
-import { useContext } from "react";
+import Link from "next/link";
+import { useContext, useMemo } from "react";
 import logo from "@/public/images/wenGoodsLogo.svg";
+import response from "../response.json";
 
 export const SideMenu = () => {
-  const { openSideMenu, toggleSideMenu, view } = useContext(AppContext);
+  const { openSideMenu, toggleSideMenu, view, setView } =
+    useContext(AppContext);
+  const items = response.data.rows;
+
+  const lastAddedItem = useMemo(() => {
+    return items.reduce(
+      (latest, item) =>
+        new Date(item.createdAt) > new Date(latest.createdAt) ? item : latest,
+      items[0]
+    );
+  }, [items]);
+
+  const lastDeletedItem = useMemo(() => {
+    return items.reduce((latest, item) => {
+      const latestDeletedAt = latest.deletedAt
+        ? new Date(latest.deletedAt)
+        : new Date(0);
+      return item.deletedAt && new Date(item.deletedAt) > latestDeletedAt
+        ? item
+        : latest;
+    }, items[0]);
+  }, [items]);
+
+  const totalStock = useMemo(() => {
+    return items.reduce((total, item) => total + item.stock, 0);
+  }, [items]);
+
+  const totalItems = useMemo(() => {
+    return items.length;
+  }, [items]);
+
   return (
     <Drawer anchor="right" open={openSideMenu} onClose={toggleSideMenu}>
       <Image
@@ -24,15 +56,98 @@ export const SideMenu = () => {
         style={{ width: "30%", alignSelf: "center", marginTop: 10 }}
       />
       <List>
-        <ListItem>
-          <Typography variant="h6">{`You are logged as ${view.toUpperCase()}`}</Typography>
-        </ListItem>
-        <Divider />
-        <ListItem>
-          <ListItemText primary="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary="Item 2" />
+        {view === "admin" ? (
+          <>
+            <ListItem sx={{ gap: 1 }}>
+              <Typography variant="h6" fontSize={16}>
+                You are logged in as
+              </Typography>
+              <Typography fontSize={18}>{view.toUpperCase()}</Typography>
+            </ListItem>
+            <Divider />
+            <ListItem
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <Typography variant="h6" fontSize={16}>
+                Last Added Item:
+              </Typography>
+              <Typography fontSize={16}>{lastAddedItem.title}</Typography>
+            </ListItem>
+            <ListItem
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <Typography variant="h6" fontSize={16}>
+                Last Deleted Item:
+              </Typography>
+              <Typography fontSize={16}>
+                {` ${lastDeletedItem?.title}` || "None"}
+              </Typography>
+            </ListItem>
+            <ListItem
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <Typography variant="h6" fontSize={16}>
+                Total Items in Stock:
+              </Typography>
+              <Typography fontSize={16}>{totalStock}</Typography>
+            </ListItem>
+            <ListItem
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <Typography variant="h6" fontSize={16}>
+                Total Items:{" "}
+              </Typography>
+              <Typography fontSize={16}>{totalItems}</Typography>
+            </ListItem>
+          </>
+        ) : (
+          <>
+            <ListItem sx={{ textAlign: "center" }}>
+              <Link href="/">
+                <Typography variant="h6">Home</Typography>
+              </Link>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <Link
+                href="https://opensea.io/es/collection/wengoods"
+                target="_blank"
+              >
+                <Typography>Buy $GOODS</Typography>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="https://x.com/wen_goods" passHref>
+                <Typography>Follow us on X</Typography>
+              </Link>
+            </ListItem>
+          </>
+        )}
+        <ListItem
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Button onClick={() => setView(view === "admin" ? "user" : "admin")}>
+            {view === "admin" ? "Check as User" : "Back to Admin"}
+          </Button>
         </ListItem>
       </List>
     </Drawer>

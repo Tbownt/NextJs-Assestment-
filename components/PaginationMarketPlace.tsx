@@ -18,9 +18,13 @@ export const PaginationMarketPlace = ({
     <Box
       sx={{
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "center",
         alignItems: "center",
-        mt: 4,
+        gap: {
+          sx: 12.5,
+          md: 25,
+        },
+        mt: 5,
       }}
     >
       <Button

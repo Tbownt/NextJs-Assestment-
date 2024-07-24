@@ -1,4 +1,5 @@
 "use client";
+import { useContext, useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -8,8 +9,9 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useContext, useEffect, useState } from "react";
 import { AppContext } from "@/context/MarketPlaceContext";
+import { SideMenu } from "./SideMenu";
+import { useGetPathName } from "@/hooks/useGetPathName";
 import Link from "next/link";
 
 export const Navbar = () => {
@@ -73,7 +75,7 @@ export const Navbar = () => {
             fontSize={24}
             sx={{ display: isSmallScreen ? "none" : "block" }}
           >
-            MARKETPLACE
+            {useGetPathName()}
           </Typography>
         </Box>
         <Button
@@ -89,6 +91,7 @@ export const Navbar = () => {
         >
           <MenuIcon sx={{ color: "#FFFFFF" }} />
         </Button>
+        <SideMenu />
       </Toolbar>
     </AppBar>
   );
