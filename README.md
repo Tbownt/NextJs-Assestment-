@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Crypto - Challenge
 
-## Getting Started
+**Esta aplicacion fue creada con el fin de demostrar mis habilidades como desarrollador Front-end para un puesto como desarrollador Frontend para un proyecto crypto
+En esta aplicacion pueden encontrar un Sidemenu con Informacion de administrador y un sneakpeak como vista de User, ademas de tener las siguientes paginas:**
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Home
+- Marketplace
+- Marketplace/[id]
+- ErrorPage
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologias
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+La aplicacion fue mayormente creada con TypeScript a la par de NextJS en la version 14 y Material UI
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Como correr la aplicacion
 
-## Learn More
+1. **Clona el repositorio**:
+    ```bash
+    git clone https://github.com/tbownt/NextJs-Assestment-
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Instala sus dependencias**:
+    ```bash
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Levanta el servidor de Desarrollo**:
+    ```bash
+    npm run dev
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+4. **Abre tu navegador** y accede a `http://localhost:3000`.
