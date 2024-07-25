@@ -93,8 +93,7 @@ const NftDetail = ({ params }: { params: { nftId: string } }) => {
             width: {
               xs: "90%",
             },
-            height: "20%",
-            mb: 5,
+            justifyContent: "center",
           }}
         >
           <ImageWithFallback
