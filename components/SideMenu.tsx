@@ -19,10 +19,12 @@ export const SideMenu = () => {
     useContext(AppContext);
   const items = response.data.rows;
 
+  //Memoized data to prevent any rerenders opening the sidemenu
   const lastAddedItem = useMemo(() => {
     return items.reduce(
       (latest, item) =>
         new Date(item.createdAt) > new Date(latest.createdAt) ? item : latest,
+      //retrieve data mutating to Date
       items[0]
     );
   }, [items]);
@@ -35,6 +37,7 @@ export const SideMenu = () => {
       return item.deletedAt && new Date(item.deletedAt) > latestDeletedAt
         ? item
         : latest;
+      //returning last deletedAt
     }, items[0]);
   }, [items]);
 
@@ -120,7 +123,16 @@ export const SideMenu = () => {
           <>
             <ListItem sx={{ textAlign: "center" }}>
               <Link href="/">
-                <Typography variant="h6">Home</Typography>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    "&:hover": {
+                      color: "#00ff99",
+                    },
+                  }}
+                >
+                  Home
+                </Typography>
               </Link>
             </ListItem>
             <Divider />
@@ -129,12 +141,30 @@ export const SideMenu = () => {
                 href="https://opensea.io/es/collection/wengoods"
                 target="_blank"
               >
-                <Typography>Buy $GOODS</Typography>
+                <Typography
+                  fontSize={26}
+                  sx={{
+                    "&:hover": {
+                      color: "#00ff99",
+                    },
+                  }}
+                >
+                  Buy $GOODS
+                </Typography>
               </Link>
             </ListItem>
             <ListItem>
               <Link href="https://x.com/wen_goods" passHref>
-                <Typography>Follow us on X</Typography>
+                <Typography
+                  fontSize={26}
+                  sx={{
+                    "&:hover": {
+                      color: "#00ff99",
+                    },
+                  }}
+                >
+                  Follow us on X
+                </Typography>
               </Link>
             </ListItem>
           </>
@@ -145,7 +175,17 @@ export const SideMenu = () => {
             justifyContent: "center",
           }}
         >
-          <Button onClick={() => setView(view === "admin" ? "user" : "admin")}>
+          <Button
+            onClick={() => setView(view === "admin" ? "user" : "admin")}
+            sx={{
+              color: "black",
+              backgroundColor: "#00ff99",
+              "&:hover": {
+                color: "#00ff99",
+                background: "black",
+              },
+            }}
+          >
             {view === "admin" ? "Check as User" : "Back to Admin"}
           </Button>
         </ListItem>

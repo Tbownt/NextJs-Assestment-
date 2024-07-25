@@ -18,6 +18,9 @@ export const ImageWithFallback = ({
   useEffect(() => {
     setImgSrc(src);
   }, [src]);
+  //There are a couple of broken images returning Forbidden 403
+  //So for this case we would use OnErrorCapture to set
+  //a default image once it returns an error
 
   return (
     <Image

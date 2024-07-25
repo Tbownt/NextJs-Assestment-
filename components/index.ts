@@ -4,6 +4,7 @@ import { InternalError } from "./InternalError";
 import { MarketPlace } from "./MarketPlace";
 import { Navbar } from "./Navbar";
 import { SideMenu } from "./SideMenu";
+import { NotFoundID } from "./NotFoundID";
 
 export {
   Footer,
@@ -12,4 +13,5 @@ export {
   Navbar,
   InternalError,
   SideMenu,
+  NotFoundID,
 };

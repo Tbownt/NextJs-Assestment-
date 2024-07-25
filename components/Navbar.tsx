@@ -27,7 +27,7 @@ export const Navbar = () => {
         setIsScrolled(false);
       }
     };
-
+    //this Effect change the property static to sticky from the navbar once you scroll down the page
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -38,7 +38,7 @@ export const Navbar = () => {
     <AppBar
       position={isScrolled ? "sticky" : "static"}
       sx={{
-        backgroundColor: isScrolled ? "#6338ae" : "black",
+        backgroundColor: isScrolled ? "#6338ae" : "#121212",
         transition: "background-color 0.5s ease",
       }}
     >
@@ -84,7 +84,7 @@ export const Navbar = () => {
             right: 1,
             mr: 1,
             "&:hover": {
-              backgroundColor: isScrolled ? "#7B47D6" : "#121212",
+              backgroundColor: isScrolled ? "#7B47D6" : "#2c384a",
             },
           }}
           onClick={() => toggleSideMenu()}

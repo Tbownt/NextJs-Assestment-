@@ -3,6 +3,7 @@ import { Item } from "@/types";
 import { useState, useEffect, useMemo } from "react";
 
 export const usePagination = (items: Item[]) => {
+  //Basic pagination method to show 6 items per page
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 

@@ -5,10 +5,10 @@ import { Item } from "@/types";
 interface AppContextProps {
   openSideMenu: boolean;
   view: "admin" | "user";
-  selectedCard?: Item | null;
+  selectedCard: Item | null;
   toggleSideMenu: () => void;
   setView: (view: "admin" | "user") => void;
-  setSelectedCard: (card: Item) => void;
+  setSelectedCard: (card: Item | null) => void;
 }
 
 interface ContextProps {
@@ -19,9 +19,7 @@ export const AppContext = createContext<AppContextProps>({} as AppContextProps);
 export const AppProvider = ({ children }: ContextProps) => {
   const [openSideMenu, setOpenSideMenu] = useState(false);
   const [view, setViewState] = useState<"admin" | "user">("admin");
-  const [selectedCard, setSelectedCardState] = useState<
-    Item | null | undefined
-  >(null);
+  const [selectedCard, setSelectedCardState] = useState<Item | null>(null);
 
   const toggleSideMenu = () => {
     setOpenSideMenu((prev) => !prev);
@@ -31,7 +29,7 @@ export const AppProvider = ({ children }: ContextProps) => {
     setViewState(view);
   };
 
-  const setSelectedCard = (item: Item) => {
+  const setSelectedCard = (item: Item | null) => {
     setSelectedCardState(item);
   };
 

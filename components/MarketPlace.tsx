@@ -30,6 +30,8 @@ export const MarketPlace = ({ items }: MarketPlaceListProps) => {
   const [visibleIndex, setVisibleIndex] = useState(0);
 
   useEffect(() => {
+    //this effect makes the Fade in 1 by 1 possible passing the visibleIndex in <Fade/>
+    //as well as a timeout to manage the interval in order to control the delay on the effect
     if (visibleIndex < currentItems.length) {
       const timer = setTimeout(() => {
         setVisibleIndex((prev) => prev + 1);
@@ -40,6 +42,7 @@ export const MarketPlace = ({ items }: MarketPlaceListProps) => {
   }, [visibleIndex, currentItems.length]);
 
   useEffect(() => {
+    //Once you change the page, it will scroll up to the top
     setVisibleIndex(0);
     scrollTo(0, 0);
   }, [currentPage]);
@@ -50,12 +53,14 @@ export const MarketPlace = ({ items }: MarketPlaceListProps) => {
   };
 
   const nftItems = filteredItems(currentItems);
+  //Filtered items with 0 Stock and hideWhenOutOfStock
 
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "center",
+        backgroundColor: "#121212",
       }}
     >
       <Box
@@ -76,7 +81,7 @@ export const MarketPlace = ({ items }: MarketPlaceListProps) => {
                 <Card
                   onClick={() => checkCardDetail(nft)}
                   sx={{
-                    display: "flex",
+                    display: nft.hidden ? "none" : "flex",
                     flexDirection: "column",
                     height: {
                       lg: "95%",
