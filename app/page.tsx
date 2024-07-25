@@ -64,6 +64,7 @@ const HomePage = () => {
               },
               my: 5,
             }}
+            fontSize={24}
           >
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora,
             porro asperiores eaque incidunt voluptate iste, nostrum voluptas

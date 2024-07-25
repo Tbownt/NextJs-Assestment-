@@ -162,7 +162,7 @@ const NftDetail = ({ params }: { params: { nftId: string } }) => {
                 display: "flex",
                 flexDirection: "row",
                 gap: 1,
-                width: { md: "30%", lg: "30%" },
+                width: { md: "30%", lg: "35%" },
                 justifyContent: "center",
                 my: 2,
               }}
@@ -178,7 +178,7 @@ const NftDetail = ({ params }: { params: { nftId: string } }) => {
                 backgroundColor: "#00ff99",
                 display: "flex",
                 gap: 1,
-                width: { xs: "70%", md: "30%", lg: "30%" },
+                width: { xs: "70%", md: "30%", lg: "35%" },
                 justifyContent: "center",
                 my: 4,
               }}
@@ -195,7 +195,7 @@ const NftDetail = ({ params }: { params: { nftId: string } }) => {
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: "#00ff99",
-                width: { md: "30%", lg: "30%" },
+                width: { md: "30%", lg: "35%" },
                 gap: 1,
                 my: 3,
               }}

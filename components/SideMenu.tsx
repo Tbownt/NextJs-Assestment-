@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 import logo from "@/public/images/wenGoodsLogo.svg";
 import response from "../response.json";
 
@@ -19,35 +19,13 @@ export const SideMenu = () => {
     useContext(AppContext);
   const items = response.data.rows;
 
-  //Memoized data to prevent any rerenders opening the sidemenu
-  const lastAddedItem = useMemo(() => {
-    return items.reduce(
-      (latest, item) =>
-        new Date(item.createdAt) > new Date(latest.createdAt) ? item : latest,
-      //retrieve data mutating to Date
-      items[0]
-    );
-  }, [items]);
+  // Calculate totalStock using map
+  const totalStock = items
+    .map((item) => item.stock)
+    .reduce((total, stock) => total + stock, 0);
 
-  const lastDeletedItem = useMemo(() => {
-    return items.reduce((latest, item) => {
-      const latestDeletedAt = latest.deletedAt
-        ? new Date(latest.deletedAt)
-        : new Date(0);
-      return item.deletedAt && new Date(item.deletedAt) > latestDeletedAt
-        ? item
-        : latest;
-      //returning last deletedAt
-    }, items[0]);
-  }, [items]);
-
-  const totalStock = useMemo(() => {
-    return items.reduce((total, item) => total + item.stock, 0);
-  }, [items]);
-
-  const totalItems = useMemo(() => {
-    return items.length;
-  }, [items]);
+  // Calculate totalItems using map
+  const totalItems = items.map((item) => item).length;
 
   return (
     <Drawer anchor="right" open={openSideMenu} onClose={toggleSideMenu}>
@@ -55,7 +33,7 @@ export const SideMenu = () => {
         src={logo}
         height={500}
         width={500}
-        alt={"logo"}
+        alt="logo"
         style={{ width: "30%", alignSelf: "center", marginTop: 10 }}
       />
       <List>
@@ -68,32 +46,6 @@ export const SideMenu = () => {
               <Typography fontSize={18}>{view.toUpperCase()}</Typography>
             </ListItem>
             <Divider />
-            <ListItem
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-            >
-              <Typography variant="h6" fontSize={16}>
-                Last Added Item:
-              </Typography>
-              <Typography fontSize={16}>{lastAddedItem.title}</Typography>
-            </ListItem>
-            <ListItem
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-            >
-              <Typography variant="h6" fontSize={16}>
-                Last Deleted Item:
-              </Typography>
-              <Typography fontSize={16}>
-                {` ${lastDeletedItem?.title}` || "None"}
-              </Typography>
-            </ListItem>
             <ListItem
               sx={{
                 display: "flex",
