@@ -81,7 +81,7 @@ const HomePage = () => {
             backgroundColor: "#00ff99",
             height: "40px",
             width: {
-              lg: "15%",
+              lg: "20%",
               md: "35%",
               xs: "50%",
             },
