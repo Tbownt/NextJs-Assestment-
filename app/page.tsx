@@ -9,7 +9,7 @@ import { useContext } from "react";
 const HomePage = () => {
   const { view } = useContext(AppContext);
   return (
-    <Box sx={{ minHeight: "100vh" }}>
+    <>
       <Navbar />
       <Box
         sx={{
@@ -82,6 +82,7 @@ const HomePage = () => {
             height: "40px",
             width: {
               lg: "15%",
+              md: "35%",
               xs: "50%",
             },
           }}
@@ -106,7 +107,7 @@ const HomePage = () => {
         </Box>
       </Box>
       <Footer />
-    </Box>
+    </>
   );
 };
 
