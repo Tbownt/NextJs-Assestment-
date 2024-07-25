@@ -43,7 +43,6 @@ const NftDetail = ({ params }: { params: { nftId: string } }) => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
           backgroundImage: "url(/images/detail_background.jpg)",
@@ -64,7 +63,7 @@ const NftDetail = ({ params }: { params: { nftId: string } }) => {
             },
           }}
         >
-          <ArrowCircleLeftOutlinedIcon sx={{ height: "40px", width: "40px" }} />{" "}
+          <ArrowCircleLeftOutlinedIcon sx={{ height: "40px", width: "40px" }} />
           BACK TO MARKETPLACE
         </Button>
         <Typography
@@ -109,6 +108,7 @@ const NftDetail = ({ params }: { params: { nftId: string } }) => {
             style={{
               alignSelf: "center",
               borderRadius: "10px",
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
             }}
           />
 
@@ -121,6 +121,7 @@ const NftDetail = ({ params }: { params: { nftId: string } }) => {
               my: 2,
               width: {
                 xs: "100%",
+                lg: "50%",
               },
               height: {
                 xs: "80%",
@@ -162,7 +163,7 @@ const NftDetail = ({ params }: { params: { nftId: string } }) => {
                 display: "flex",
                 flexDirection: "row",
                 gap: 1,
-                width: { md: "30%", lg: "27%" },
+                width: { md: "30%", lg: "30%" },
                 justifyContent: "center",
                 my: 2,
               }}
@@ -178,7 +179,7 @@ const NftDetail = ({ params }: { params: { nftId: string } }) => {
                 backgroundColor: "#00ff99",
                 display: "flex",
                 gap: 1,
-                width: { xs: "70%", md: "30%", lg: "27%" },
+                width: { xs: "70%", md: "30%", lg: "30%" },
                 justifyContent: "center",
                 my: 4,
               }}
@@ -195,7 +196,7 @@ const NftDetail = ({ params }: { params: { nftId: string } }) => {
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: "#00ff99",
-                width: { md: "30%", lg: "27%" },
+                width: { md: "30%", lg: "30%" },
                 gap: 1,
                 my: 3,
               }}
